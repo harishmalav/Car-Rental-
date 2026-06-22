@@ -1,0 +1,210 @@
+
+{% extends "adminmaster.html" %}
+{% load static %}
+{% block m1 %}
+
+<style>
+
+body{
+    background:#f4f6f9;
+}
+
+.edit-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:30px 0;
+}
+
+.edit-card{
+    width:700px;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0px 5px 20px rgba(0,0,0,0.15);
+}
+
+.edit-title{
+    text-align:center;
+    font-size:35px;
+    font-weight:bold;
+    margin-bottom:25px;
+    color:#222;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:8px;
+    color:#333;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    box-sizing:border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    outline:none;
+    border-color:#007bff;
+}
+
+.btn-save{
+    width:100%;
+    padding:14px;
+    background:#28a745;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.btn-save:hover{
+    background:#218838;
+}
+
+.car-id{
+    background:#f8f9fa;
+}
+
+</style>
+
+<div class="edit-container">
+
+<div class="edit-card">
+
+<h1 class="edit-title">
+    🚗 Edit Car Registration
+</h1>
+
+{% if key1 %}
+{% for k in key1 %}
+
+<form method="POST" action="../save_edit_cars/">
+
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label>Car ID</label>
+        <input type="text" name="id" value="{{k.id}}" readonly class="car-id">
+    </div>
+
+    <div class="form-group">
+        <label>Car Name</label>
+        <input type="text" name="T1" value="{{k.Car_Name}}">
+    </div>
+
+    <div class="form-group">
+        <label>Price Per Day</label>
+        <input type="number" name="T2" value="{{k.Price_Per_Day}}">
+    </div>
+
+    <div class="form-group">
+        <label>Car Model</label>
+        <input type="text" name="T3" value="{{k.Car_Model}}">
+    </div>
+
+    <div class="form-group">
+        <label>Car Number</label>
+        <input type="text" name="T4" value="{{k.Car_Number}}">
+    </div>
+
+    <div class="form-group">
+        <label>Fuel Type</label>
+        <select name="T5">
+
+            <option value="Petrol"
+            {% if k.Fuel_Type == 'Petrol' %}selected{% endif %}>
+            Petrol
+            </option>
+
+            <option value="Diesel"
+            {% if k.Fuel_Type == 'Diesel' %}selected{% endif %}>
+            Diesel
+            </option>
+
+            <option value="Electric"
+            {% if k.Fuel_Type == 'Electric' %}selected{% endif %}>
+            Electric
+            </option>
+
+            <option value="CNG"
+            {% if k.Fuel_Type == 'CNG' %}selected{% endif %}>
+            CNG
+            </option>
+
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Transmission</label>
+
+        <select name="T6">
+
+            <option value="Manual"
+            {% if k.Transmissio == 'Manual' %}selected{% endif %}>
+            Manual
+            </option>
+
+            <option value="Automatic"
+            {% if k.Transmissio == 'Automatic' %}selected{% endif %}>
+            Automatic
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="form-group">
+        <label>Seating Capacity</label>
+        <input type="number" name="T7"
+               value="{{k.Seating_Capacity}}">
+    </div>
+
+    <div class="form-group">
+        <label>Availability Status</label>
+
+        <select name="T8">
+
+            <option value="Available"
+            {% if k.Availability_Status == 'Available' %}selected{% endif %}>
+            Available
+            </option>
+
+            <option value="Booked"
+            {% if k.Availability_Status == 'Booked' %}selected{% endif %}>
+            Booked
+            </option>
+
+        </select>
+
+    </div>
+
+    <input type="submit"
+           value="💾 Save Changes"
+           class="btn-save">
+
+</form>
+
+{% endfor %}
+{% endif %}
+
+</div>
+
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,68 @@
+{% extends "adminmaster.html" %}
+{% load static %}
+
+{% block m1 %}
+
+<style>
+
+table{
+    width:90%;
+    margin:20px auto;
+    border-collapse:collapse;
+    background:white;
+}
+
+th{
+    background:#222;
+    color:white;
+    padding:12px;
+    text-align:center;
+}
+
+td{
+    padding:10px;
+    text-align:center;
+    border:1px solid #ddd;
+}
+
+tr:nth-child(even){
+    background:#f2f2f2;
+}
+
+tr:hover{
+    background:#ddd;
+}
+
+h1{
+    text-align:center;
+}
+
+</style>
+
+<h1>All Admins</h1>
+
+{% if key1 %}
+
+<table>
+
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+    </tr>
+
+    {% for k in key1 %}
+
+    <tr>
+        <td>{{ k.name }}</td>
+        <td>{{ k.email }}</td>
+        <td>{{ k.phone }}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endif %}
+
+{% endblock %}
