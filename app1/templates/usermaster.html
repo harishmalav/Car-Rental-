@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Car Rental System</title>
+
+<style>
+
+body{
+
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+}
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    background:#222;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+    box-sizing:border-box;
+}
+
+.nav-left{
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+    width:30%;
+}
+
+.nav-right{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:15px;
+}
+
+.nav-right a{
+    color:white;
+    text-decoration:none;
+    margin-left:15px;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.nav-right a:hover{
+    color:orange;
+}
+
+.content{
+    margin-top:60px;
+    padding:20px;
+}
+
+.navbar.hide{
+    transform:translateY(-100%);
+    transition:0.4s;
+}
+
+.navbar.show{
+    transform:translateY(0);
+    transition:0.4s;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar" id="navbar">
+
+    <div class="nav-left">
+        Welcome
+        {% if key1 %}
+            {% for k in key1 %}
+                {{ k.name }}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="nav-right">
+        <a href="/show_user_profile/">Profile</a>
+        <a href="/show_car/">All Cars</a>
+        <a href="/show_add_to_car/">Cart</a>
+        <a href="/show_user_history/">History</a>
+        <a href="/logout/">Logout</a>
+    </div>
+
+</div>
+
+<div class="content">
+
+    {% block m3 %}
+    {% endblock %}
+
+</div>
+
+<script>
+
+let prevScrollpos = window.pageYOffset;
+
+window.onscroll = function() {
+
+    let currentScrollPos = window.pageYOffset;
+
+    if (prevScrollpos > currentScrollPos) {
+
+        document.getElementById("navbar").classList.remove("hide");
+        document.getElementById("navbar").classList.add("show");
+
+    } else {
+
+        document.getElementById("navbar").classList.remove("show");
+        document.getElementById("navbar").classList.add("hide");
+
+    }
+
+    prevScrollpos = currentScrollPos;
+}
+
+</script>
+
+</body>
+</html>

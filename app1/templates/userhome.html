@@ -1,0 +1,30 @@
+
+
+
+{% extends "usermaster.html" %}
+{% load static %}
+{% block m3 %}
+
+
+{% if key1 %}
+    {% for k in key1 %}
+        userid : {{k.userid }}<br/>
+        Name :{{ k.name }}<br/>
+        Email :: {{ k.email }}<br/>
+        Phone No :{{ k.phone }}<br/>
+        Address : {{k.address }}<br/>
+        <form method="post" action="../edit_user_profile/">
+            {% csrf_token %}
+            <input type="hidden" name="userid" value="{{ k.userid }}">
+            <input type="submit" value="Edit">
+        </form>
+        <form method="post" action="../edit_user_password/">
+            {% csrf_token %}
+            <input type="hidden" name="email" value="{{ k.email }}">
+            <input type="submit" value="change password">
+        </form>
+
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

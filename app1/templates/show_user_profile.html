@@ -1,0 +1,94 @@
+{% extends "usermaster.html" %}
+{% load static %}
+
+{% block m3 %}
+
+<style>
+
+.profile-card{
+    width:500px;
+    margin:50px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0px 0px 15px rgba(0,0,0,0.2);
+}
+
+.profile-card h1{
+    text-align:center;
+    color:#222;
+}
+
+.info{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.btn{
+    padding:10px 20px;
+    border:none;
+    border-radius:5px;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.edit-btn{
+    background:#007bff;
+}
+
+.pass-btn{
+    background:#28a745;
+}
+
+</style>
+
+{% if key1 %}
+    {% for k in key1 %}
+
+    <div class="profile-card">
+
+        <h1>User Profile</h1>
+
+        <div class="info">
+            <b>User ID:</b> {{ k.userid }}
+        </div>
+
+        <div class="info">
+            <b>Name:</b> {{ k.name }}
+        </div>
+
+        <div class="info">
+            <b>Email:</b> {{ k.email }}
+        </div>
+
+        <div class="info">
+            <b>Phone:</b> {{ k.phone }}
+        </div>
+
+        <div class="info">
+            <b>Address:</b> {{ k.address }}
+        </div>
+
+        <br>
+
+        <form method="post" action="../edit_user_profile/">
+            {% csrf_token %}
+            <input type="hidden" name="userid" value="{{ k.userid }}">
+            <input type="submit" value="Edit Profile" class="btn edit-btn">
+        </form>
+
+        <br>
+
+        <form method="post" action="../edit_user_password/">
+            {% csrf_token %}
+            <input type="hidden" name="email" value="{{ k.email }}">
+            <input type="submit" value="Change Password" class="btn pass-btn">
+        </form>
+
+    </div>
+
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

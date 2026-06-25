@@ -1,0 +1,66 @@
+{% extends "adminmaster.html" %}
+{% load static %}
+{% block m1 %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+<style>
+    table{
+
+        margin:20px auto;
+        border-collapse:collapse;
+        background-color:white;
+    }
+    th{
+    padding:20px;
+    text-align:center;
+
+    padding:20px;
+    background-color:#222;
+    color:white
+    }
+    td{
+    padding:10px;
+    text-align:center;
+    border:1px solid #ddd;
+    }
+    h1{
+    text-align:center;
+    }
+tr:nth-child(even){
+    background:#f2f2f2;
+}
+
+    tr:hover{
+    background:#ddd;
+    }
+
+</style>
+
+</head>
+<body><h1>User data</h1>
+{% if key1 %}
+    <table>
+        <tr>
+            <th>User Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+        </tr>
+        {% for k in key1 %}
+        <tr>
+            <td>{{k.userid}}</td>
+            <td>{{k.name}}</td>
+            <td>{{k.email}}</td>
+            <td>{{k.phone}}</td>
+            <td>{{k.address}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+</body>
+</html>
+{% endblock %}

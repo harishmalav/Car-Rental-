@@ -1,0 +1,902 @@
+{% extends "basemaster.html" %}
+{% load static %}
+
+{% block title %}Car Rentals — Premium car rentals in Kota{% endblock %}
+
+{% block extra_style %}
+.hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    background:var(--ink);
+}
+
+.hero-bg{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(180deg, rgba(11,14,20,.55) 0%, rgba(11,14,20,.75) 60%, rgba(11,14,20,1) 100%),
+        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1800');
+    background-size:cover;
+    background-position:center 40%;
+    animation:heroZoom 18s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom{
+    from{transform:scale(1);}
+    to{transform:scale(1.08);}
+}
+
+.hero-inner{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:1180px;
+    margin:0 auto;
+    padding:160px 6% 220px;
+}
+
+.hero-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:var(--gold);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:22px;
+}
+
+.hero-eyebrow::before{
+    content:'';
+    width:28px;
+    height:1px;
+    background:var(--gold);
+}
+
+.hero h1{
+    color:var(--cream);
+    font-size:clamp(38px,6vw,68px);
+    font-weight:700;
+    line-height:1.08;
+    max-width:780px;
+    margin-bottom:22px;
+}
+
+.hero h1 em{
+    font-style:normal;
+    color:var(--gold);
+}
+
+.hero p{
+    color:var(--muted);
+    font-size:18px;
+    max-width:520px;
+    line-height:1.7;
+    margin-bottom:36px;
+}
+
+.hero-actions{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+}
+
+.booking-wrap{
+    position:relative;
+    z-index:3;
+    max-width:1080px;
+    margin:-90px auto 0;
+    padding:0 6%;
+}
+
+.booking{
+    background:rgba(22,26,35,0.85);
+    backdrop-filter:blur(16px);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:28px 32px;
+    display:grid;
+    grid-template-columns:1.2fr 1fr 1fr 1fr auto;
+    gap:20px;
+    align-items:end;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.5);
+}
+
+.booking-field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.booking-field label{
+    color:var(--muted);
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.booking-field select,
+.booking-field input{
+    background:rgba(255,255,255,0.05);
+    border:1px solid var(--line);
+    color:var(--cream);
+    padding:11px 12px;
+    border-radius:6px;
+    font-size:14px;
+    font-family:'Inter',sans-serif;
+    outline:none;
+    transition:.2s;
+}
+
+.booking-field select option{
+    background:var(--ink-soft);
+    color:var(--cream);
+}
+
+.booking-field select:focus,
+.booking-field input:focus{
+    border-color:var(--gold);
+}
+
+.booking-submit{
+    background:var(--gold);
+    color:var(--ink);
+    border:none;
+    padding:13px 26px;
+    border-radius:6px;
+    font-weight:600;
+    font-size:14.5px;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:.25s;
+}
+
+.booking-submit:hover{
+    background:var(--gold-deep);
+}
+
+@media(max-width:980px){
+    .booking{
+        grid-template-columns:1fr 1fr;
+    }
+    .booking-submit{
+        grid-column:1/-1;
+    }
+}
+
+.stats{
+    background:var(--ink);
+    padding:90px 6% 70px;
+}
+
+.stats-grid{
+    max-width:1080px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+    text-align:center;
+}
+
+.stat-num{
+    color:var(--gold);
+    font-family:'Sora',sans-serif;
+    font-size:42px;
+    font-weight:700;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:13.5px;
+    letter-spacing:.5px;
+    margin-top:6px;
+}
+
+@media(max-width:768px){
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+section{
+    padding:110px 6%;
+}
+
+.section-head{
+    max-width:640px;
+    margin:0 auto 60px;
+    text-align:center;
+}
+
+.eyebrow{
+    color:var(--gold-deep);
+    font-size:12.5px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:14px;
+    display:block;
+}
+
+.section-head h2{
+    font-size:clamp(28px,4vw,42px);
+    font-weight:700;
+    line-height:1.2;
+}
+
+.section-head p{
+    color:#6B7280;
+    font-size:16.5px;
+    margin-top:14px;
+    line-height:1.7;
+}
+
+.features{
+    background:var(--cream);
+}
+
+.feature-container{
+    max-width:1080px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
+}
+
+.feature-box{
+    background:#fff;
+    padding:38px 30px;
+    border-radius:12px;
+    border:1px solid #ECEAE3;
+    transition:.3s;
+}
+
+.feature-box:hover{
+    transform:translateY(-6px);
+    border-color:var(--gold);
+    box-shadow:0 24px 40px -24px rgba(11,14,20,0.18);
+}
+
+.feature-icon{
+    width:50px;
+    height:50px;
+    border-radius:10px;
+    background:rgba(201,162,75,0.12);
+    color:var(--gold-deep);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:22px;
+}
+
+.feature-icon svg{
+    width:24px;
+    height:24px;
+}
+
+.feature-box h3{
+    font-size:19px;
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+.feature-box p{
+    color:#6B7280;
+    font-size:14.5px;
+    line-height:1.7;
+}
+
+@media(max-width:900px){
+    .feature-container{
+        grid-template-columns:1fr;
+    }
+}
+
+.featured-cars{
+    background:#fff;
+}
+
+.car-container{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+}
+
+.car-card{
+    background:var(--cream);
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid #ECEAE3;
+    transition:.35s;
+}
+
+.car-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 30px 50px -28px rgba(11,14,20,0.25);
+}
+
+.car-img-wrap{
+    position:relative;
+    height:190px;
+    overflow:hidden;
+    background:#E5E2D8;
+}
+
+.car-img-wrap img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.car-card:hover .car-img-wrap img{
+    transform:scale(1.08);
+}
+
+.car-badge{
+    position:absolute;
+    top:12px;
+    left:12px;
+    background:var(--ink);
+    color:var(--gold);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.5px;
+    padding:5px 11px;
+    border-radius:5px;
+    text-transform:uppercase;
+}
+
+.car-body{
+    padding:20px 20px 22px;
+}
+
+.car-body h3{
+    font-size:17px;
+    font-weight:600;
+    margin-bottom:4px;
+}
+
+.car-meta{
+    display:flex;
+    gap:14px;
+    color:#8A8778;
+    font-size:12.5px;
+    margin-bottom:14px;
+}
+
+.car-price-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+}
+
+.car-price{
+    font-size:20px;
+    font-weight:700;
+    color:var(--ink);
+    font-family:'Sora',sans-serif;
+}
+
+.car-price span{
+    font-size:12.5px;
+    font-weight:400;
+    color:#8A8778;
+}
+
+.car-link{
+    color:var(--gold-deep);
+    font-size:13px;
+    font-weight:600;
+}
+
+.more-card{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:var(--ink);
+    min-height:100%;
+}
+
+.more-content{
+    padding:30px 24px;
+}
+
+.more-content h3{
+    color:var(--cream);
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.more-content p{
+    color:var(--muted);
+    font-size:13.5px;
+    margin-bottom:20px;
+    line-height:1.6;
+}
+
+.more-btn{
+    display:inline-block;
+    background:var(--gold);
+    color:var(--ink);
+    padding:11px 22px;
+    border-radius:6px;
+    font-weight:600;
+    font-size:13.5px;
+}
+
+.more-btn:hover{
+    background:var(--gold-deep);
+}
+
+@media(max-width:980px){
+    .car-container{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:560px){
+    .car-container{
+        grid-template-columns:1fr;
+    }
+}
+
+.about{
+    background:var(--cream);
+}
+
+.about-grid{
+    max-width:1180px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.about-img{
+    border-radius:14px;
+    overflow:hidden;
+    height:420px;
+}
+
+.about-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.about-text .eyebrow{
+    text-align:left;
+}
+
+.about-text h2{
+    font-size:clamp(26px,3.6vw,36px);
+    font-weight:700;
+    line-height:1.25;
+    margin-bottom:18px;
+}
+
+.about-text p{
+    color:#6B7280;
+    font-size:16px;
+    line-height:1.8;
+    margin-bottom:26px;
+}
+
+.about-points{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.about-point{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    font-size:15px;
+    color:#374151;
+}
+
+.about-point svg{
+    width:20px;
+    height:20px;
+    color:var(--gold-deep);
+    flex-shrink:0;
+    margin-top:2px;
+}
+
+@media(max-width:900px){
+    .about-grid{
+        grid-template-columns:1fr;
+        gap:40px;
+    }
+    .about-img{
+        height:280px;
+    }
+}
+
+.reviews{
+    background:var(--ink);
+}
+
+.reviews .section-head h2{
+    color:var(--cream);
+}
+
+.reviews .section-head p{
+    color:var(--muted);
+}
+
+.review-container{
+    max-width:1080px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+}
+
+.review-card{
+    background:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:28px 26px;
+    border-radius:12px;
+}
+
+.review-stars{
+    color:var(--gold);
+    font-size:14px;
+    margin-bottom:16px;
+    letter-spacing:2px;
+}
+
+.review-card p{
+    color:#D1D5DB;
+    font-size:15px;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.review-who{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.review-avatar{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:rgba(201,162,75,0.15);
+    color:var(--gold);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+    font-size:14px;
+    font-family:'Sora',sans-serif;
+}
+
+.review-name{
+    color:var(--cream);
+    font-size:14px;
+    font-weight:600;
+}
+
+.review-loc{
+    color:var(--muted);
+    font-size:12.5px;
+}
+
+@media(max-width:900px){
+    .review-container{
+        grid-template-columns:1fr;
+    }
+}
+
+.contact{
+    background:var(--cream);
+    text-align:center;
+}
+
+.contact-card{
+    max-width:760px;
+    margin:0 auto;
+    background:var(--ink);
+    border-radius:18px;
+    padding:60px 50px;
+}
+
+.contact-card h2{
+    color:var(--cream);
+    font-size:clamp(26px,3.4vw,34px);
+    margin-bottom:14px;
+}
+
+.contact-card p{
+    color:var(--muted);
+    font-size:15.5px;
+    margin-bottom:34px;
+}
+
+.contact-grid{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    flex-wrap:wrap;
+    margin-bottom:36px;
+}
+
+.contact-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#D1D5DB;
+    font-size:14.5px;
+}
+
+.contact-item svg{
+    width:18px;
+    height:18px;
+    color:var(--gold);
+}
+{% endblock %}
+
+{% block m2 %}
+
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+        <span class="hero-eyebrow">Premium car rentals · Kota, Rajasthan</span>
+        <h1>Drive the road<br>on <em>your</em> terms.</h1>
+        <p>From city runabouts to weekend SUVs — a curated fleet, transparent pricing, and a booking that takes under two minutes.</p>
+        <div class="hero-actions">
+            <a href="/login/" class="btn-primary">Reserve a car &rarr;</a>
+            <a href="#fleet" class="btn-ghost">View fleet</a>
+        </div>
+    </div>
+</section>
+
+<div class="booking-wrap reveal">
+    <form class="booking" action="/show_cars_all/" method="get">
+        <div class="booking-field">
+            <label for="pickup-loc">Pickup location</label>
+            <select id="pickup-loc" name="location">
+                <option>Kota, Rajasthan</option>
+                <option>Jaipur, Rajasthan</option>
+                <option>Udaipur, Rajasthan</option>
+                <option>Delhi NCR</option>
+            </select>
+        </div>
+        <div class="booking-field">
+            <label for="pickup-date">Pickup date</label>
+            <input type="date" id="pickup-date" name="pickup_date">
+        </div>
+        <div class="booking-field">
+            <label for="return-date">Return date</label>
+            <input type="date" id="return-date" name="return_date">
+        </div>
+        <div class="booking-field">
+            <label for="car-type">Car type</label>
+            <select id="car-type" name="car_type">
+                <option>Any</option>
+                <option>Sedan</option>
+                <option>SUV</option>
+                <option>Hatchback</option>
+            </select>
+        </div>
+        <button type="submit" class="booking-submit">Search cars</button>
+    </form>
+</div>
+
+<section class="stats">
+    <div class="stats-grid">
+        <div class="reveal">
+            <div class="stat-num">500+</div>
+            <div class="stat-label">Cars in fleet</div>
+        </div>
+        <div class="reveal">
+            <div class="stat-num">12K+</div>
+            <div class="stat-label">Happy customers</div>
+        </div>
+        <div class="reveal">
+            <div class="stat-num">8</div>
+            <div class="stat-label">Cities covered</div>
+        </div>
+        <div class="reveal">
+            <div class="stat-num">4.8/5</div>
+            <div class="stat-label">Average rating</div>
+        </div>
+    </div>
+</section>
+
+<section class="features" id="why">
+    <div class="section-head reveal">
+        <span class="eyebrow">Why choose us</span>
+        <h2>Renting, made effortless</h2>
+        <p>No hidden fees, no fine print surprises — just a car, on time, every time.</p>
+    </div>
+    <div class="feature-container">
+        <div class="feature-box reveal">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13M5 13v5a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-5M5 13h14M7.5 16h0M16.5 16h0"/></svg>
+            </div>
+            <h3>Premium fleet</h3>
+            <p>From efficient hatchbacks to full-size SUVs, every car is inspected and detailed before handover.</p>
+        </div>
+        <div class="feature-box reveal">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21c4.97-2 8-6 8-11V6l-8-3-8 3v4c0 5 3.03 9 8 11z"/></svg>
+            </div>
+            <h3>Transparent pricing</h3>
+            <p>The price you see at booking is the price you pay — no surprise fees at pickup.</p>
+        </div>
+        <div class="feature-box reveal">
+            <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+            </div>
+            <h3>24/7 support</h3>
+            <p>Real support around the clock, on call or WhatsApp, for anything on the road.</p>
+        </div>
+    </div>
+</section>
+
+<section class="featured-cars" id="fleet">
+    <div class="section-head reveal">
+        <span class="eyebrow">Featured fleet</span>
+        <h2>Pick your ride</h2>
+        <p>A snapshot of what's available this week. The full fleet has even more options.</p>
+    </div>
+    <div class="car-container">
+        <div class="car-card reveal">
+            <div class="car-img-wrap">
+                <span class="car-badge">SUV</span>
+                <img src="/media/OIP.webp" alt="Mahindra Scorpio">
+            </div>
+            <div class="car-body">
+                <h3>Mahindra Scorpio</h3>
+                <div class="car-meta"><span>5 seats</span><span>Diesel</span><span>Manual</span></div>
+                <div class="car-price-row">
+                    <div class="car-price">&#8377;2,000 <span>/day</span></div>
+                    <a href="/login/" class="car-link">Book &rarr;</a>
+                </div>
+            </div>
+        </div>
+        <div class="car-card reveal">
+            <div class="car-img-wrap">
+                <span class="car-badge">SUV</span>
+                <img src="/media/download.webp" alt="Toyota Fortuner">
+            </div>
+            <div class="car-body">
+                <h3>Toyota Fortuner</h3>
+                <div class="car-meta"><span>7 seats</span><span>Diesel</span><span>Automatic</span></div>
+                <div class="car-price-row">
+                    <div class="car-price">&#8377;4,500 <span>/day</span></div>
+                    <a href="/login/" class="car-link">Book &rarr;</a>
+                </div>
+            </div>
+        </div>
+        <div class="car-card reveal">
+            <div class="car-img-wrap">
+                <span class="car-badge">Compact SUV</span>
+                <img src="/media/download (1).webp" alt="Hyundai Creta">
+            </div>
+            <div class="car-body">
+                <h3>Hyundai Creta</h3>
+                <div class="car-meta"><span>5 seats</span><span>Petrol</span><span>Automatic</span></div>
+                <div class="car-price-row">
+                    <div class="car-price">&#8377;2,500 <span>/day</span></div>
+                    <a href="/login/" class="car-link">Book &rarr;</a>
+                </div>
+            </div>
+        </div>
+        <div class="car-card more-card reveal">
+            <div class="more-content">
+                <h3>40+ more cars</h3>
+                <p>Explore the complete collection across every category and budget.</p>
+                <a href="/show_cars_all/" class="more-btn">View all cars</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about">
+    <div class="about-grid">
+        <div class="about-img reveal">
+            <img src="https://images.unsplash.com/photo-1493238792000-8113da705763?q=80&w=1200" alt="Car handover">
+        </div>
+        <div class="about-text reveal">
+            <span class="eyebrow">About us</span>
+            <h2>Built on trust, run on reliability</h2>
+            <p>We started with three cars and a simple promise: clean vehicles, fair prices, and zero surprises. That promise still drives every booking today.</p>
+            <div class="about-points">
+                <div class="about-point">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Verified, sanitized vehicles before every handover
+                </div>
+                <div class="about-point">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Doorstep delivery available across Kota
+                </div>
+                <div class="about-point">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    Free cancellation up to 24 hours before pickup
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="reviews" id="reviews">
+    <div class="section-head reveal">
+        <span class="eyebrow">Customer reviews</span>
+        <h2>What renters say</h2>
+    </div>
+    <div class="review-container">
+        <div class="review-card reveal">
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p>Smooth booking and the car was spotless. Easily the best rental experience I've had in Kota.</p>
+            <div class="review-who">
+                <div class="review-avatar">RS</div>
+                <div>
+                    <div class="review-name">Rahul Sharma</div>
+                    <div class="review-loc">Kota, Rajasthan</div>
+                </div>
+            </div>
+        </div>
+        <div class="review-card reveal">
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p>Clean cars, fair pricing, and the support team actually picks up the phone. Highly recommend.</p>
+            <div class="review-who">
+                <div class="review-avatar">PJ</div>
+                <div>
+                    <div class="review-name">Priya Jain</div>
+                    <div class="review-loc">Jaipur, Rajasthan</div>
+                </div>
+            </div>
+        </div>
+        <div class="review-card reveal">
+            <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p>Booked a Fortuner for a family trip — no hidden charges, exactly as quoted. Will book again.</p>
+            <div class="review-who">
+                <div class="review-avatar">MV</div>
+                <div>
+                    <div class="review-name">Mohit Verma</div>
+                    <div class="review-loc">Udaipur, Rajasthan</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <div class="contact-card reveal">
+        <h2>Ready to hit the road?</h2>
+        <p>Reach out directly, or jump straight into booking.</p>
+        <div class="contact-grid">
+            <div class="contact-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
+                harish@gmail.com
+            </div>
+            <div class="contact-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+                +91 98765 43210
+            </div>
+            <div class="contact-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Kota, Rajasthan
+            </div>
+        </div>
+        <a href="/login/" class="btn-primary">Book a car now &rarr;</a>
+    </div>
+</section>
+
+{% endblock %}

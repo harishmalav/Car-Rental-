@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+
+body{
+    margin:0px;
+    padding:0px;
+    font-family:Arial, sans-serif;
+}
+.navbar{
+    position:fixed;
+    top:0px;
+    right:0px;
+    left:0px;
+    height:70px;
+    background:#222;
+    padding: 15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+    box-sizing:border-box;
+}
+.left-nevbar{
+    color:white;
+    font-size:30px;
+    font-weight:bold;
+    width:30%;
+}
+.right-nevbar{
+    gap:5px;
+    display:flex;
+    justify-content:flex-end;
+    algin-item:center;
+}
+.right-nevbar a{
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    margin-left:15px;
+    font-weight:bold;
+}
+.right-nevbar a:hover{
+    color:red;
+}
+.content{
+    margin-top:80px;
+    padding:20px;
+}
+
+
+
+
+</style>
+</head>
+<body>
+<div class="navbar" id="nevbar">
+    <div class="left-nevbar">
+        Welcome
+    </div>
+    <div class="right-nevbar">
+        <a href="/adminhome/">Profile</a>
+        <a href="/adminreg/">Admin Reg</a><br/>
+        <a href="/show_admin/">All Admin</a><br/>
+        <a href="/show_user/">All User</a><br/>
+         <a href="/show_car/">All  cars</a><br/>
+        <a href="/carreg/">Car registration</a><br/>
+        <a href="/show_all_bookings/">All Booking</a>
+        <a href="/logout/">Logout</a>
+    </div>
+</div>
+<div class="content">
+    {% block m1 %}
+    {% endblock %}
+</div>
+</body>
+</html>

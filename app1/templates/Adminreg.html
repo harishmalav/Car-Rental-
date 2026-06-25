@@ -1,0 +1,111 @@
+{% extends "adminmaster.html" %}
+{% load static %}
+
+{% block m1 %}
+
+<style>
+
+.register-card{
+    width:500px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0px 4px 15px rgba(0,0,0,0.15);
+}
+
+.register-card h1{
+    text-align:center;
+    margin-bottom:25px;
+    color:#333;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
+.form-group input{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    box-sizing:border-box;
+}
+
+.btn-register{
+    width:100%;
+    padding:12px;
+    background:#007bff;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-register:hover{
+    background:#0056b3;
+}
+
+.msg{
+    text-align:center;
+    margin-top:15px;
+    color:green;
+    font-weight:bold;
+}
+
+</style>
+
+<div class="register-card">
+
+    <h1>Admin Registration</h1>
+
+    <form method="post" action="../adminreg/">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="T1" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="T2" required>
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" name="T3" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="T4" required>
+        </div>
+
+        <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" name="T5" required>
+        </div>
+
+        <input type="submit" value="Register" class="btn-register">
+
+    </form>
+
+    {% if data %}
+        <div class="msg">
+            {{ data }}
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

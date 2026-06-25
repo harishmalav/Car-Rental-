@@ -1,0 +1,117 @@
+
+{% extends "adminmaster.html" %}
+{% load static %}
+{% block m1 %}
+
+<style>
+
+.upload-container{
+    display:flex;
+    justify-content:center;
+    margin-top:50px;
+}
+
+.upload-card{
+    width:500px;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0px 5px 20px rgba(0,0,0,0.15);
+    text-align:center;
+}
+
+.upload-title{
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:20px;
+    color:#222;
+}
+
+.upload-icon{
+    font-size:70px;
+    margin-bottom:15px;
+}
+
+.form-group{
+    margin:20px 0;
+}
+
+.form-group input[type="file"]{
+    width:100%;
+    padding:10px;
+    border:2px dashed #007bff;
+    border-radius:10px;
+    background:#f8f9fa;
+    cursor:pointer;
+}
+
+.btn-save{
+    width:100%;
+    padding:14px;
+    background:#28a745;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.btn-save:hover{
+    background:#218838;
+}
+
+.message{
+    margin-top:15px;
+    color:green;
+    font-weight:bold;
+}
+
+</style>
+
+<div class="upload-container">
+
+    <div class="upload-card">
+
+        <div class="upload-icon">
+            📷
+        </div>
+
+        <div class="upload-title">
+            Upload Car Photo
+        </div>
+
+        <form method="post"
+              action="../upload_car_photos/"
+              enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <input type="hidden"
+                   name="id"
+                   value="{{ carid }}">
+
+            <div class="form-group">
+                <input type="file"
+                       name="F2"
+                       required>
+            </div>
+
+            <input type="submit"
+                   value="Upload Photo"
+                   class="btn-save">
+
+        </form>
+
+        {% if data %}
+            <div class="message">
+                {{ data }}
+            </div>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
+

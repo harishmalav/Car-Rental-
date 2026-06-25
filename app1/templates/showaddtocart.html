@@ -1,0 +1,157 @@
+{% extends "usermaster.html" %}
+{% load static %}
+
+{% block m3 %}
+
+<style>
+
+.cart-container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content:center;
+}
+
+.car-card{
+    width:350px;
+    background:white;
+    border-radius:15px;
+    box-shadow:0px 2px 10px rgba(0,0,0,0.15);
+    padding:20px;
+}
+
+.car-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.car-name{
+    font-size:25px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.price{
+    font-size:30px;
+    font-weight:bold;
+    color:#000;
+}
+
+.info{
+    margin-top:10px;
+    font-size:18px;
+}
+
+.btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.delete-btn{
+    background:red;
+}
+
+.book-btn{
+    background:#28a745;
+}
+
+.total-box{
+    text-align:center;
+    margin-top:30px;
+}
+    .btn{
+    background:#007bff;
+    color:white;
+    padding:10px 20px;
+    text-decoration:none;
+    border-radius:8px;
+}
+
+
+</style>
+
+{% if key1 %}
+
+<div class="cart-container">
+
+{% for k in key1 %}
+
+<div class="car-card">
+
+    <img src="/media/{{ k.Car_Photo }}">
+
+    <div class="car-name">
+        {{ k.Car_Name }}
+    </div>
+
+    <div class="info">
+        Model : {{ k.Car_Model }}
+    </div>
+
+    <div class="info">
+        Number : {{ k.Car_Number }}
+    </div>
+
+    <div class="info">
+        Fuel : {{ k.Fuel_Type }}
+    </div>
+
+    <div class="info">
+        Seats : {{ k.Seating_Capacity }}
+    </div>
+
+    <div class="price">
+        ₹{{ k.Price_Per_Day }}/day
+    </div>
+
+    <form method="post" action="../delete_cart/">
+        {% csrf_token %}
+        <input type="hidden" name="userid" value="{{ k.userid }}">
+        <input type="submit" value="Delete Car" class="btn delete-btn">
+    </form>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="total-box">
+
+    <h1>Total Amount : ₹{{ total }}</h1>
+
+    <form method="post" action="../booknow/">
+        {% csrf_token %}
+
+        <input type="hidden" name="total" value="{{ total }}">
+
+        {% for k in key1 %}
+            <input type="hidden" name="carid" value="{{ k.carid }}">
+            <input type="hidden" name="userid" value="{{ k.userid }}">
+            <input type="hidden" name="Car_Name" value="{{ k.Car_Name }}">
+            <input type="hidden" name="Car_Number" value="{{ k.Car_Number }}">
+        {% endfor %}
+
+        <input type="submit" value="BOOK NOW" class="btn book-btn">
+    </form>
+
+</div>
+
+{% else %}
+
+<div style="text-align:center;margin-top:100px;">
+    <h1>Your Cart is Empty 🚗</h1>
+    <a href="/show_car/" class="btn">Add Car</a>
+</div>
+
+{% endif %}
+
+{% endblock %}

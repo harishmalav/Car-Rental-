@@ -1,0 +1,154 @@
+{% extends "adminmaster.html" %}
+{% load static %}
+
+{% block m1 %}
+
+<style>
+
+.car-card{
+    width:600px;
+    margin:30px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0px 4px 15px rgba(0,0,0,0.15);
+}
+
+.car-card h1{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    box-sizing:border-box;
+}
+
+.btn-register{
+    width:100%;
+    padding:12px;
+    background:#28a745;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-register:hover{
+    background:#1e7e34;
+}
+
+.links{
+    text-align:center;
+    margin-top:20px;
+}
+
+.links a{
+    text-decoration:none;
+    margin:0 10px;
+}
+
+.msg{
+    text-align:center;
+    color:green;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+</style>
+
+<div class="car-card">
+
+<h1>Car Registration</h1>
+
+<form method="POST" action="../carreg/">
+
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label>Car Name</label>
+        <input type="text" name="T1" required>
+    </div>
+
+    <div class="form-group">
+        <label>Price Per Day</label>
+        <input type="number" name="T2" required>
+    </div>
+
+    <div class="form-group">
+        <label>Car Model</label>
+        <input type="text" name="T3" required>
+    </div>
+
+    <div class="form-group">
+        <label>Car Number</label>
+        <input type="text" name="T4" required>
+    </div>
+
+    <div class="form-group">
+        <label>Fuel Type</label>
+        <select name="T5" required>
+            <option value="">Select Fuel Type</option>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Electric">Electric</option>
+            <option value="CNG">CNG</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Transmission</label>
+        <select name="T6" required>
+            <option value="">Select Transmission</option>
+            <option value="Manual">Manual</option>
+            <option value="Automatic">Automatic</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Seating Capacity</label>
+        <input type="number" name="T7" required>
+    </div>
+
+    <div class="form-group">
+        <label>Availability Status</label>
+        <select name="T8">
+            <option value="Available">Available</option>
+            <option value="Booked">Booked</option>
+        </select>
+    </div>
+
+    <input type="submit" value="Register Car" class="btn-register">
+
+</form>
+
+{% if data %}
+    <div class="msg">
+        {{ data }}
+    </div>
+{% endif %}
+
+<div class="links">
+    <a href="/adminhome/">Dashboard</a> |
+    <a href="/logout/">Logout</a>
+</div>
+
+</div>
+
+{% endblock %}

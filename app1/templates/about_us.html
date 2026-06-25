@@ -1,0 +1,199 @@
+{% extends "basemaster.html" %}
+{% load static %}
+
+{% block title %}About us — Harish Rentals{% endblock %}
+
+{% block extra_style %}
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+    padding:80px 0;
+}
+
+.section{
+    background:#fff;
+    border:1px solid #ECEAE3;
+    padding:40px;
+    margin-bottom:28px;
+    border-radius:14px;
+}
+
+.section .eyebrow{
+    display:block;
+    color:var(--gold-deep);
+    font-size:12.5px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.section h2{
+    color:var(--ink);
+    margin-bottom:18px;
+    font-size:30px;
+    font-weight:700;
+}
+
+.section p{
+    line-height:1.85;
+    font-size:16.5px;
+    color:#5B5B58;
+    margin-bottom:14px;
+}
+
+.section p:last-child{
+    margin-bottom:0;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:20px;
+}
+
+.feature-box{
+    background:var(--cream);
+    border:1px solid #ECEAE3;
+    padding:28px 24px;
+    border-radius:12px;
+}
+
+.feature-icon{
+    width:46px;
+    height:46px;
+    border-radius:10px;
+    background:rgba(201,162,75,0.12);
+    color:var(--gold-deep);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:16px;
+}
+
+.feature-icon svg{
+    width:22px;
+    height:22px;
+}
+
+.feature-box h3{
+    margin-bottom:10px;
+    color:var(--ink);
+    font-size:17px;
+    font-weight:600;
+}
+
+.feature-box p{
+    color:#6B7280;
+    font-size:14.5px;
+    margin-bottom:0;
+}
+{% endblock %}
+
+{% block m2 %}
+
+<div class="page-header">
+    <h1>About our car rental service</h1>
+    <p>Your trusted partner for comfortable, affordable and reliable car rentals</p>
+</div>
+
+<div class="container">
+
+    <div class="section reveal">
+        <span class="eyebrow">Who we are</span>
+        <h2>A simple, reliable way to rent</h2>
+        <p>
+            Welcome to the Car Rental Management System, built by Harish Malav.
+            Our platform gives customers an easy, secure, and convenient way to
+            rent vehicles online — whether for business travel, family trips,
+            vacations, or daily commuting.
+        </p>
+        <p>
+            Our mission is to make car rentals simple and accessible for everyone.
+            Through our online booking system, customers can browse available cars,
+            compare prices, check vehicle details, and book their preferred vehicle
+            within minutes.
+        </p>
+    </div>
+
+    <div class="section reveal">
+        <span class="eyebrow">Our vision</span>
+        <h2>Where we're headed</h2>
+        <p>
+            We aim to become a trusted and leading car rental service provider by
+            offering high-quality vehicles, transparent pricing, and excellent
+            customer support — making transportation easier and more accessible
+            while maintaining the highest standards of service and safety.
+        </p>
+    </div>
+
+    <div class="section reveal">
+        <span class="eyebrow">Why choose us</span>
+        <h2>What sets us apart</h2>
+
+        <div class="features">
+
+            <div class="feature-box">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13M5 13v5a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-5M5 13h14"/></svg>
+                </div>
+                <h3>Wide range of cars</h3>
+                <p>Choose from hatchbacks, sedans, SUVs, and premium vehicles.</p>
+            </div>
+
+            <div class="feature-box">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21c4.97-2 8-6 8-11V6l-8-3-8 3v4c0 5 3.03 9 8 11z"/></svg>
+                </div>
+                <h3>Affordable pricing</h3>
+                <p>Competitive rates with transparent billing and no hidden charges.</p>
+            </div>
+
+            <div class="feature-box">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/></svg>
+                </div>
+                <h3>Secure booking</h3>
+                <p>Safe, reliable online booking with secure data handling.</p>
+            </div>
+
+            <div class="feature-box">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+                </div>
+                <h3>Quick approval</h3>
+                <p>Fast booking confirmation and efficient rental management.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="section reveal">
+        <span class="eyebrow">Our services</span>
+        <h2>What's included</h2>
+        <p>
+            We provide complete car rental services including online vehicle
+            browsing, booking management, customer profile management, booking
+            history tracking, payment processing, and rental status updates.
+        </p>
+        <p>
+            Our system also helps administrators efficiently manage vehicles,
+            customer bookings, payments, and rental operations, ensuring a
+            seamless experience for both customers and management.
+        </p>
+    </div>
+
+    <div class="section reveal">
+        <span class="eyebrow">Our commitment</span>
+        <h2>Customer satisfaction, first</h2>
+        <p>
+            We are committed to providing reliable vehicles, professional service,
+            and a hassle-free rental experience. Our goal is to ensure every
+            journey is safe, comfortable, and memorable.
+        </p>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,185 @@
+{% extends "basemaster.html" %}
+{% load static %}
+
+{% block title %}Login — Harish Rentals{% endblock %}
+
+{% block extra_style %}
+.login-section{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:140px 20px 80px;
+    background:var(--ink);
+}
+
+.login-card{
+    width:430px;
+    background:#fff;
+    padding:44px 40px;
+    border-radius:16px;
+}
+
+.login-icon{
+    width:60px;
+    height:60px;
+    border-radius:14px;
+    background:rgba(201,162,75,0.12);
+    color:var(--gold-deep);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 18px;
+}
+
+.login-icon svg{
+    width:30px;
+    height:30px;
+}
+
+.login-title{
+    text-align:center;
+    font-size:26px;
+    font-weight:700;
+    color:var(--ink);
+    margin-bottom:6px;
+}
+
+.login-sub{
+    text-align:center;
+    color:#6B7280;
+    font-size:14.5px;
+    margin-bottom:30px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+    font-size:14px;
+    color:var(--ink);
+}
+
+.form-group input{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid #E2E0D8;
+    border-radius:8px;
+    font-size:15px;
+    font-family:'Inter',sans-serif;
+    outline:none;
+    transition:.2s;
+}
+
+.form-group input:focus{
+    border-color:var(--gold);
+}
+
+.btn-row{
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+}
+
+.login-btn,
+.register-btn{
+    flex:1;
+    text-align:center;
+    padding:13px;
+    border:none;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:15.5px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.login-btn{
+    background:var(--gold);
+    color:var(--ink);
+}
+
+.login-btn:hover{
+    background:var(--gold-deep);
+}
+
+.register-btn{
+    background:transparent;
+    color:var(--ink);
+    border:1px solid #E2E0D8;
+}
+
+.register-btn:hover{
+    border-color:var(--gold);
+    color:var(--gold-deep);
+}
+
+.login-footer{
+    text-align:center;
+    margin-top:22px;
+    color:#9CA3AF;
+    font-size:13px;
+}
+{% endblock %}
+
+{% block m2 %}
+
+<div class="login-section">
+
+    <div class="login-card reveal">
+
+        <div class="login-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13M5 13v5a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-5M5 13h14M7.5 16h0M16.5 16h0"/></svg>
+        </div>
+
+        <div class="login-title">Welcome back</div>
+        <div class="login-sub">Sign in to manage your bookings</div>
+
+        <form method="POST" action="../login/">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Email address</label>
+                <input type="email"
+                       name="T1"
+                       placeholder="Enter your email"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password"
+                       name="T2"
+                       placeholder="Enter your password"
+                       required>
+            </div>
+
+            <div class="btn-row">
+
+                <input type="submit"
+                       value="Login"
+                       class="login-btn">
+
+                <a href="/show_user_reg/" class="register-btn">
+                    Register
+                </a>
+
+            </div>
+
+        </form>
+
+        <div class="login-footer">
+            Welcome to the Car Rental Management System
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

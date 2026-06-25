@@ -1,0 +1,76 @@
+{% extends "usermaster.html" %}
+{% load static %}
+
+{% block m3 %}
+<style>
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th{
+    background:#222;
+    color:white;
+    padding:12px;
+}
+
+td{
+    padding:10px;
+    text-align:center;
+}
+
+tr:nth-child(even){
+    background:#f2f2f2;
+}
+
+tr:hover{
+    background:#ddd;
+}
+
+</style>
+
+<table border="1" cellpadding="10" cellspacing="0" width="100%">
+
+<tr>
+    <th>Booking ID</th>
+    <th>Car Name</th>
+    <th>Car Number</th>
+    <th>Name</th>
+    <th>Pickup Date</th>
+    <th>Return Date</th>
+    <th>Amount</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+{% for k in key1 %}
+
+<tr>
+
+    <td>{{ k.bookingid }}</td>
+
+    <td>{{ k.Car_Name }}</td>
+
+    <td>{{ k.Car_Number }}</td>
+
+    <td>{{ k.Full_Name }}</td>
+
+    <td>{{ k.Pickup_Date }}</td>
+
+    <td>{{ k.Return_Date }}</td>
+
+    {% for b in key2 %}
+        <td>{{ b.Amount }}</td>
+
+    {% endfor %}
+
+    <td>{{ k.Status }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+{% endblock %}
