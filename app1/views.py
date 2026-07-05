@@ -354,6 +354,8 @@ def edit_user_password(request):
             return render(request, 'author.html')
     else:
         return render(request, 'author.html')
+# @Permission_class({IsAuthenticated, IsSuperAdmin})
+# @api_view(['POST'])
 
 def save_edit_user_password(request):
     if request.session.has_key('usertype'):
